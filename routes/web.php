@@ -9,7 +9,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn () => redirect()->route('projects.index'));
+Route::get('/', fn () => redirect()->route('projects.index'))->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

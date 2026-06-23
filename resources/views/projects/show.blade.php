@@ -87,9 +87,8 @@
     <script>
     function searchIssues(baseUrl) {
         return {
-            query: '{{ $filters["search"] ?? "" }}',
+            query: @json($filters['search'] ?? ''),
             search() {
-                const url = new URL(baseUrl);
                 const params = new URLSearchParams(window.location.search);
                 if (this.query) {
                     params.set('search', this.query);

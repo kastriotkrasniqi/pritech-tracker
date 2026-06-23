@@ -8,7 +8,7 @@ Pritech Tracker is a full-featured project management tool that lets teams creat
 
 ## Tech Stack
 
-- **Backend:** Laravel 12, PHP 8.2
+- **Backend:** Laravel 13, PHP 8.2
 - **Frontend:** Blade templates, Alpine.js, Tailwind CSS
 - **Auth:** Laravel Breeze
 - **Database:** SQLite
@@ -18,7 +18,7 @@ Pritech Tracker is a full-featured project management tool that lets teams creat
 
 ### Core
 - Projects CRUD with start date and deadline
-- Issues CRUD with status (`open`, `in_progress`, `closed`) and priority (`low`, `medium`, `high`, `critical`) enums
+- Issues CRUD with status (`open`, `in_progress`, `closed`) and priority (`low`, `medium`, `high`) enums
 - Tags with name (unique) and optional hex colour
 - Comments per issue with author name and body
 - Issues list with filters: status, priority, tag

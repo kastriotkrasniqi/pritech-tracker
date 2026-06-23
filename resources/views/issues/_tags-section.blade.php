@@ -10,7 +10,7 @@
     <div class="flex flex-wrap gap-2 mb-4">
         <template x-for="tag in currentTags" :key="tag.id">
             <span class="px-2 py-1 rounded-full text-xs text-white flex items-center gap-1"
-                  :style="'background-color: ' + tag.color">
+                  :style="'background-color: ' + (tag.color || '#6b7280')">
                 <span x-text="tag.name"></span>
                 <button @click="detach(tag.id)" class="ml-1 hover:opacity-70 font-bold">&times;</button>
             </span>

@@ -42,14 +42,18 @@ class ProjectController extends Controller
         $tags = Tag::orderBy('name')->get();
         $filters = request()->only(['status', 'priority', 'tag', 'search']);
 
+        $sortable = ['title', 'status', 'priority', 'due_date'];
+        $sort     = in_array(request('sort'), $sortable) ? request('sort') : 'created_at';
+        $dir      = request('dir') === 'asc' ? 'asc' : 'desc';
+
         $issues = $project->issues()
             ->with(['tags', 'assignees'])
             ->filter($filters)
-            ->latest()
+            ->orderBy($sort, $dir)
             ->paginate(15)
             ->withQueryString();
 
-        return view('projects.show', compact('project', 'issues', 'tags', 'filters'));
+        return view('projects.show', compact('project', 'issues', 'tags', 'filters', 'sort', 'dir'));
     }
 
     public function edit(Project $project): View

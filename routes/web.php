@@ -18,7 +18,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('projects', ProjectController::class);
     Route::resource('projects.issues', IssueController::class)->shallow();
-    Route::resource('tags', TagController::class)->only(['index', 'store']);
+    Route::resource('tags', TagController::class)->only(['index', 'store', 'destroy']);
 
     // Tag attach/detach (AJAX)
     Route::post('issues/{issue}/tags/{tag}', [IssueTagController::class, 'attach'])->name('issues.tags.attach');

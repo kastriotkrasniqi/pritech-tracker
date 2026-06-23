@@ -1,18 +1,22 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-xl font-semibold text-gray-800">
-            New Issue — <a href="{{ route('projects.show', $project) }}" class="text-indigo-600 hover:underline">{{ $project->name }}</a>
-        </h2>
+        <div class="flex items-center gap-2">
+            <a href="{{ route('projects.index') }}" class="text-xs text-tr-dim hover:text-tr-muted transition-colors font-mono">Projects</a>
+            <span class="text-tr-dim text-xs">/</span>
+            <a href="{{ route('projects.show', $project) }}" class="text-xs text-tr-dim hover:text-tr-muted transition-colors font-mono">{{ $project->name }}</a>
+            <span class="text-tr-dim text-xs">/</span>
+            <h1 class="font-display font-bold text-xl text-tr-text">New Issue</h1>
+        </div>
     </x-slot>
 
-    <div class="py-8 max-w-2xl mx-auto px-4">
-        <div class="bg-white rounded-lg shadow p-6">
+    <div class="py-8 max-w-2xl mx-auto px-4 sm:px-6">
+        <div class="card p-6 animate-slide-up">
             <form method="POST" action="{{ route('projects.issues.store', $project) }}">
                 @csrf
                 @include('issues._form')
-                <div class="mt-6 flex gap-3">
-                    <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">Create Issue</button>
-                    <a href="{{ route('projects.show', $project) }}" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200">Cancel</a>
+                <div class="mt-6 flex gap-3 pt-5 border-t border-tr-border">
+                    <button type="submit" class="btn-primary">Create Issue</button>
+                    <a href="{{ route('projects.show', $project) }}" class="btn-ghost">Cancel</a>
                 </div>
             </form>
         </div>

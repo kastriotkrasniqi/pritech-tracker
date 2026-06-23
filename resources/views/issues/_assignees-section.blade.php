@@ -1,29 +1,40 @@
-<div class="bg-white rounded-lg shadow p-6"
+<div class="card p-5"
      x-data="assigneeManager({{ $issue->id }}, {{ $issue->assignees->toJson() }}, {{ $allUsers->toJson() }})">
 
     <div class="flex items-center justify-between mb-4">
-        <h3 class="text-lg font-medium text-gray-900">Assignees</h3>
-        <button @click="open = !open" class="text-sm text-indigo-600 hover:underline">Manage</button>
+        <p class="section-label">Assignees</p>
+        <button @click="open = !open"
+                class="text-xs text-tr-accent hover:text-tr-accent-h transition-colors font-medium"
+                x-text="open ? 'Done' : 'Manage'">
+        </button>
     </div>
 
-    <div class="flex flex-wrap gap-2 mb-4">
+    <div class="flex flex-wrap gap-2 min-h-[24px]">
         <template x-for="user in currentAssignees" :key="user.id">
-            <span class="px-3 py-1 rounded-full text-xs bg-indigo-100 text-indigo-800 flex items-center gap-1">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-tr-raised border border-tr-border text-tr-text">
+                <span class="w-4 h-4 rounded-full bg-tr-accent/15 border border-tr-accent/25 flex items-center justify-center text-[9px] font-bold text-tr-accent"
+                      x-text="user.name.charAt(0).toUpperCase()"></span>
                 <span x-text="user.name"></span>
-                <button @click="detach(user.id)" class="ml-1 hover:opacity-70 font-bold">&times;</button>
+                <button @click="detach(user.id)" class="ml-0.5 hover:text-tr-bad transition-colors text-tr-dim text-base font-light leading-none">&times;</button>
             </span>
         </template>
-        <span x-show="currentAssignees.length === 0" class="text-sm text-gray-400">No assignees.</span>
+        <span x-show="currentAssignees.length === 0" class="text-sm text-tr-dim">No assignees.</span>
     </div>
 
-    <div x-show="open" x-cloak class="border rounded-md p-3 bg-gray-50">
-        <p class="text-xs text-gray-500 mb-2">Click to assign / × to unassign</p>
+    <div x-show="open" x-cloak
+         x-transition:enter="transition ease-out duration-150"
+         x-transition:enter-start="opacity-0 translate-y-1"
+         x-transition:enter-end="opacity-100 translate-y-0"
+         class="mt-4 pt-4 border-t border-tr-border">
+        <p class="text-xs text-tr-dim mb-3">Click to assign / unassign</p>
         <div class="flex flex-wrap gap-2">
             <template x-for="user in allUsers" :key="user.id">
                 <button @click="toggle(user)"
-                    class="px-3 py-1 rounded-full text-xs transition"
-                    :class="isAssigned(user.id) ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'"
-                    x-text="user.name">
+                        class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium transition-all duration-100"
+                        :class="isAssigned(user.id)
+                            ? 'bg-tr-accent/15 text-tr-accent border border-tr-accent/30'
+                            : 'bg-tr-raised text-tr-muted border border-tr-border hover:border-tr-border-s hover:text-tr-text'"
+                        x-text="user.name">
                 </button>
             </template>
         </div>

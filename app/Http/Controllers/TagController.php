@@ -22,4 +22,11 @@ class TagController extends Controller
 
         return redirect()->route('tags.index')->with('success', 'Tag created.');
     }
+
+    public function destroy(Tag $tag): RedirectResponse
+    {
+        $tag->delete();
+
+        return redirect()->route('tags.index')->with('success', 'Tag deleted.');
+    }
 }
